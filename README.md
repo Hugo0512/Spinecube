@@ -12,14 +12,23 @@ The trainning data is grouped in four groups (0-10 degree, 11-20 degree, 21-45 d
 The detailed steps to implement Faster-RCNN as follows:
 1) Use LabelImg (https://github.com/tzutalin/labelImg) tool to annotate the back of all images with rectangle mode.
 2) Deploy the py-faster-rcnn in your environment:
+
+3) 
     git clone --recursive https://github.com/rbgirshick/py-faster-rcnn.git
+   
     cd py-faster-rcnn/lib
+   
     cp Makefile.config.example MAkefile.config
+   
     make all -j8
-    make pycaffe  
-3) Move your own dataset into directory …/py-faster-rcnn/data/ as this architecture:
+   
+    make pycaffe
+   
+5) Move your own dataset into directory …/py-faster-rcnn/data/ as this architecture:
     Vocdevkit2007-VoC2007
+   
             Annotations
+   
                 000001.xml
                 000002.xml
                 000003.xml
@@ -58,33 +67,52 @@ The detailed steps to implement Faster-RCNN as follows:
                 000014.jpg
                 000015.jpg
 
-4)  Use the script ./data/scripts/fetch_imagenet_models.sh to download the pretrained ZF network model and put it into directory /py-faster-rcnn/data/imagenet_models; 
+6)  Use the script ./data/scripts/fetch_imagenet_models.sh to download the pretrained ZF network model and put it into directory /py-faster-rcnn/data/imagenet_models; 
     Modify the prototxt files: the class numbers: 'num_classes' and the output: 'num_output' in /py-faster-rcnn/models/pascal_voc/ZF/faster_rcnn_end2end/train.prototxt; 
     Modify self._classes in pascal_voc.py with 'back':
+    
     self._classes = ('__background__', # always index 0
                          'back')
+    
     Then train the model with command python ./tools/train_net.py --gpu 0
 
 
 The detailed steps to implement ResNet101 with Caffe as follows:
 1) prepare the classification dataset and put it into directory ./caffe/models/ResNet-101/data as follows (cross validation):
+   
     test1
+   
     test2
+   
     test3
+   
     test4
-    train1 
+   
+    train1
+   
     train2
+   
     train3
+   
     train4
+   
     train1.txt
+   
     train2.txt
+   
     train3.txt
+   
     train4.txt
+   
     test1.txt
+   
     test2.txt
+   
     test3.txt
+   
     test4.txt
-    where txt files contain the labels of all images that are saved in test1-4 and train1-4 folders.
+   
+    where txt files contain the labels of all images that are saved in test1-4 and train1-4 folders (totally 4 pairs).
 2） 1. Use the tool convert_imageset.sh in build/tools to cinvert your data into leveldb/imdb format; and compute the mean values with the tool make_imagenet_mean.sh in build/tools, which will be used in the training of models.
     2. Modify the prototxt file resnet_101.prototxt and deploy-101.prototxt (the original file is https://github.com/KaimingHe/deep-residual-networks/blob/master/prototxt/ResNet-101-deploy.prototxt):
         replace the mean value in step 1 into these two protxt files.
