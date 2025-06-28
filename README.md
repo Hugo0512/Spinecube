@@ -73,7 +73,6 @@ The detailed steps to implement Faster-RCNN as follows:
     
 
     self._classes = ('__background__', # always index 0
-    
                          'back')
     
     Then train the model with command python ./tools/train_net.py --gpu 0
