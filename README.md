@@ -71,8 +71,8 @@ The detailed steps to implement Faster-RCNN as follows:
     Modify the prototxt files: the class numbers: 'num_classes' and the output: 'num_output' in /py-faster-rcnn/models/pascal_voc/ZF/faster_rcnn_end2end/train.prototxt; 
     Modify self._classes in pascal_voc.py with 'back':
     
-
     self._classes = ('__background__', # always index 0
+    
                          'back')
     
     Then train the model with command python ./tools/train_net.py --gpu 0
