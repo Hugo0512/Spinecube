@@ -75,7 +75,7 @@ The detailed steps to implement Faster-RCNN as follows:
     
                          'back')
     
-    Then train the model with command python ./tools/train_net.py --gpu 0
+    Then train the model with command python ./tools/train_net.py --gpu 0, all parameters is the default in original faster-rcnn project.
 
 
 The detailed steps to implement ResNet101 with Caffe as follows:
